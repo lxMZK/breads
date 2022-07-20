@@ -17,11 +17,17 @@ breads.get('/new', function(req,res) {
 breads.get('/:arrayIndex', function(req,res){
     if (Bread[req.params.arrayIndex]) {
         res.render('Show', {
-            bread: Bread[req.params.arrayIndex]
+            bread: Bread[req.params.arrayIndex],
+            index: req.params.arrayIndex
         })
     } else {
         res.render('404')
     }
+})
+
+breads.delete('/:indexArray', function(req, res){
+  Bread.splice(req.params.indexArray,1)
+  res.status(303).redirect('/breads')
 })
 
 breads.post('/', (req, res) => {
