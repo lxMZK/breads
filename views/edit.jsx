@@ -1,17 +1,18 @@
 const React = require('react')
 const Default = require('./layouts/Default')
 
-function New({bakers}) {
+function edit(data) {
   return (
     <Default>
-      <h2>Add a new bread</h2>
-      <form action="/breads" method="POST">
+      <h2>Edit</h2>
+      <form action={`/breads/${data.bread.id}?_method=PUT`} method="POST">
         <div>
           <label htmlFor="name">Name</label>
           <input
             type="text"
             name="name"
             id="name"
+            value={data.bread.name}
             required
           />
         </div>
@@ -21,6 +22,7 @@ function New({bakers}) {
             type="text"
             name="image"
             id="image"
+            value={data.bread.image}
           />
         </div>
         <div>
@@ -35,8 +37,7 @@ function New({bakers}) {
         <div>
           <label htmlFor="baker">Baker</label>
           <select name="baker" id="baker">
-            {console.log(bakers)}
-            {bakers.map((baker)=>{
+            {data.bakers.map((baker)=>{
               return(
                 <option value={baker.id} key={baker.id}>{baker.name}</option>
               )
@@ -52,4 +53,4 @@ function New({bakers}) {
   )
 }
 
-module.exports = New
+module.exports = edit

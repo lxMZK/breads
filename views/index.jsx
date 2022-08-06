@@ -3,17 +3,29 @@ const bread = require('../models/bread')
 const { lastIndexOf } = require('../models/bread')
 const Default = require('./layouts/default')
 
-function Index({ breads }) {
+function Index({ breads, bakers, title }) {
     return (
-        <Default>
+        <Default title={title}>
             <h2>Index Page</h2>
-            {/* <p>I have {breads[0].name} bread!</p> */}
+            <h3>Bakers</h3>
             <ul>
                 {
-                    breads.map(function (breads, index) {
-                        return (<li key={index}>
-                            <a href={`/breads/${index}`}>
-                                {breads.name}
+                    bakers.map((baker) => {
+                        return (
+                            <li key={baker._id}>
+                                <a href={`/bakers/${baker._id}`}>{baker.name}</a>
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+            <h3>Breads</h3>
+            <ul>
+                {
+                    breads.map(function (bread, index) {
+                        return (<li key={bread._id}>
+                            <a href={`/breads/${bread._id}`}>
+                                {bread.name}
                             </a>
                         </li>)
                     })
